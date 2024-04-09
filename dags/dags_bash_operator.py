@@ -10,14 +10,14 @@ with DAG(
     start_date=pendulum.datetime(2023, 3, 1, tz="Asia/Seoul"),
     catchup=False,
 ) as dag:
-    basg_t1 = BashOperator(
+    bash_t1 = BashOperator(
         task_id="bash_t1",
         bash_command="echo whoami",
     )
 
-    basg_t2 = BashOperator(
+    bash_t2 = BashOperator(
         task_id="bash_t2",
         bash_command="echo $HOSTNAME",
     )
 
-    basg_t1 >> basg_t2
+    bash_t1 >> bash_t2
