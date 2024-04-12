@@ -3,6 +3,14 @@ from datetime import datetime
 from airflow.operators.python import PythonOperator
 from airflow.decorators import task
 
+# task.branch
+"""
+    BranchPythonOperator 사용할 필요 없음 
+    python_branch_task = BranchPythonOperator(
+        task_id='python_branch_task',
+        python_callable=select_random
+    )
+"""
 with DAG(
     dag_id='dags_python_with_branch_decorator',
     start_date=datetime(2023,4,1),
@@ -40,4 +48,4 @@ with DAG(
         op_kwargs={'selected':'C'}
     )
 
-    select_random() >> [task_a, task_b, task_c]
+    select_random() >> [task_a, task_b, task_c] # select_random() 결과값은 BranchPythonOperator객체가 나옴

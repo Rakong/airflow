@@ -3,6 +3,12 @@ import pendulum
 from airflow.operators.branch import BaseBranchOperator
 from airflow.operators.python import PythonOperator
 
+# BaseBranchOperator
+"""
+    class CustomBranchOperator(BaseBranchOperator): 
+    BaseBranchOperator 상속 시 choose_branch 함수를 구현해줘야함
+    choose_branch는 반드시 task id를 리턴해야함
+"""
 with DAG(
     dag_id='dags_base_branch_operator',
     start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
@@ -10,7 +16,7 @@ with DAG(
     catchup=False
 ) as dag:
     class CustomBranchOperator(BaseBranchOperator):
-        def choose_branch(self, context):
+        def choose_branch(self, context): # 함수이름 변경하면 안됨, self, context 필요함(**kwargs)
             import random
             print(context)
             

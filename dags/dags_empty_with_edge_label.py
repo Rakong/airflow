@@ -3,7 +3,10 @@ import pendulum
 from airflow.operators.empty import EmptyOperator
 from airflow.utils.edgemodifier import Label
 
-
+"""
+    Edge Label : Task 연결에 대한 설명(Comment)
+    from airflow.utils.edgemodifier import Label
+"""
 with DAG(
     dag_id="dags_empty_with_edge_label",
     schedule=None,
