@@ -4,7 +4,12 @@ from airflow.operators.bash import BashOperator
 from airflow.providers.http.operators.http import SimpleHttpOperator
 from airflow.decorators import task
 import pendulum
-
+"""
+    SimpleHttpOperator 란?
+        HTTP 요청을 하고 결과로 text를 리턴 받는 오퍼레이터 (리턴 값은 Xcom에 저장)
+        HTTP를 이용하여 API를 처리하는 RestAPI 호출시 사용 가능
+        오퍼레이터 명세 확인하기
+"""
 with DAG(
     dag_id='dags_simple_http_operator',
     start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
