@@ -13,7 +13,9 @@ with DAG(
     def insrt_postgres(ip, port, dbname, user, passwd, **kwargs):
         import psycopg2
         from contextlib import closing
-
+        # psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port)) DB서버와의 연결(session)
+        # closing 함수 : conn객체가 닫아줌 
+        # cursor : client --> session(cursor) --> DB서버(컨터이너)
         with closing(psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port))) as conn:
             with closing(conn.cursor()) as cursor:
                 dag_id = kwargs.get('ti').dag_id
@@ -21,7 +23,7 @@ with DAG(
                 run_id = kwargs.get('ti').run_id
                 msg = 'insrt 수행'
                 sql = 'insert into py_opr_drct_insrt values (%s,%s,%s,%s);'
-                cursor.execute(sql,(dag_id,task_id,run_id,msg))
+                cursor.execute(sql,(dag_id,task_id,run_id,msg)) # sql 실행
                 conn.commit()
 
     insrt_postgres = PythonOperator(
