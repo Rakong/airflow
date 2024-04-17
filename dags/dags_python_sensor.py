@@ -13,8 +13,8 @@ with DAG(
         import requests
         import json
         from dateutil import relativedelta
-        connection = BaseHook.get_connection(http_conn_id)
-        url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100'
+        connection = BaseHook.get_connection(http_conn_id) # airflow에 입력된 정보
+        url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100' # 최신데이타 100개
         response = requests.get(url)
         
         contents = json.loads(response.text)

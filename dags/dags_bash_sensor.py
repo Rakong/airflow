@@ -2,7 +2,17 @@ from airflow.sensors.bash import BashSensor
 from airflow.operators.bash import BashOperator
 from airflow import DAG
 import pendulum
-
+"""
+    Sensor
+    - 일종의 특화된 오퍼레이터
+    - 특정 조건이 만족되기를 기다리고 만족되면 True를 반환하는 task
+    - BaseSensorOperator를 상속 (__init__, poke(context) 함수 재정의)
+    - 센싱하는 로직은 poke함수에 정의
+    parameters
+    poke_interval : 수행 초단위
+    timeout : maximum 초단위
+    mode : poke | reschedule 
+"""
 with DAG(
     dag_id='dags_bash_sensor',
     start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
