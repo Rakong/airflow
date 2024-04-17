@@ -16,7 +16,7 @@ with DAG(
     schedule='0 1 * * *',
     dagrun_timeout=timedelta(minutes=2),
     default_args={
-        'email_on_failure': True,
+        'email_on_failure': True, # task 실패 시 이메일을 전송할것이라는 의미
         'email': email_lst
     }
 ) as dag:

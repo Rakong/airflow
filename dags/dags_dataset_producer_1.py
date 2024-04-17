@@ -3,7 +3,11 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 import pendulum
 
-dataset_dags_dataset_producer_1 = Dataset("dags_dataset_producer_1")
+'''
+    from airflow import Dataset
+'''
+
+dataset_dags_dataset_producer_1 = Dataset("dags_dataset_producer_1") # Dataset(큐 키값)
 
 with DAG(
         dag_id='dags_dataset_producer_1',
@@ -13,6 +17,6 @@ with DAG(
 ) as dag:
     bash_task = BashOperator(
         task_id='bash_task',
-        outlets=[dataset_dags_dataset_producer_1],
+        outlets=[dataset_dags_dataset_producer_1], # outlets[Dataset]
         bash_command='echo "producer_1 수행 완료"'
     )
