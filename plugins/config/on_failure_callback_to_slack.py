@@ -4,8 +4,8 @@ def on_failure_callback_to_slack(context):
     ti = context.get('ti')
     dag_id = ti.dag_id
     task_id = ti.task_id
-    err_msg = context.get('exception')
-    batch_date = context.get('data_interval_end').in_timezone('Asia/Seoul')
+    err_msg = context.get('exception') # 에러메세지 
+    batch_date = context.get('data_interval_end').in_timezone('Asia/Seoul') # 실제 배치가 돈 날짜
 
     slack_hook = SlackWebhookHook(slack_webhook_conn_id='conn_slack_airflow_bot')
     text = "실패 알람"

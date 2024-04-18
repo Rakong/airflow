@@ -1,7 +1,13 @@
 from airflow import DAG
 import pendulum
 from airflow.operators.bash import BashOperator
-
+'''
+    task pool
+    pool : 수행할 pool
+    pool_slots : 차지할 slot 수 
+    priority_weight : task 가중치(클수록 경합시 유리)
+    weight_rule : 추가 가중치 합산방식(upstream / downstream / absolute)
+'''
 with DAG(
     dag_id="dags_bash_with_pool",
     schedule="10 0 * * 6",

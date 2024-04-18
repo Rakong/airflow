@@ -1,6 +1,6 @@
 import requests
 # client_id, authorize_code 노출 주의, 실제 값은 임시로만 넣고 Git에 올라가지 않도록 유의
-
+# 토큰 다시받을려면 인가코드부터 다시해야함
 client_id = '{client_id}'
 redirect_uri = 'https://example.com/oauth'
 authorize_code = '{authorize_code}'

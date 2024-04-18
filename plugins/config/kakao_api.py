@@ -7,7 +7,7 @@ from airflow.models import Variable
 
 REDIRECT_URL = 'https://example.com/oauth'
 
-def _refresh_token_to_variable():
+def _refresh_token_to_variable(): # 토큰 저장 
     client_id = Variable.get("kakao_client_secret")
     tokens = eval(Variable.get("kakao_tokens"))
     refresh_token = tokens.get('refresh_token')
@@ -28,12 +28,12 @@ def _refresh_token_to_variable():
 
     now = pendulum.now('Asia/Seoul').strftime('%Y-%m-%d %H:%M:%S')
     tokens['updated'] = now
-    os.system(f'airflow variables set kakao_tokens "{tokens}"')
+    os.system(f'airflow variables set kakao_tokens "{tokens}"') # cli 명령 실행 
     print('variable 업데이트 완료(key: kakao_tokens)')
 
 
 
-def send_kakao_msg(talk_title: str, content: dict):
+def send_kakao_msg(talk_title: str, content: dict):  # 메세지 전송
     '''
     content:{'tltle1':'content1', 'title2':'content2'...}
     '''
@@ -41,7 +41,7 @@ def send_kakao_msg(talk_title: str, content: dict):
     try_cnt = 0
     while True:
         ### get Access 토큰
-        tokens = eval(Variable.get("kakao_tokens"))
+        tokens = eval(Variable.get("kakao_tokens")) # eval dictionary형태로 
         access_token = tokens.get('access_token')
         content_lst = []
         button_lst = []
@@ -79,7 +79,7 @@ def send_kakao_msg(talk_title: str, content: dict):
             'buttons': button_lst
         }
 
-        send_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+        send_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send" # api주소
         headers = {
             "Authorization": f'Bearer {access_token}'
         }

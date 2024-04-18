@@ -16,12 +16,12 @@ with DAG(
     }
 
 ) as dag:
-    task_slp_90 = BashOperator(
+    task_slp_90 = BashOperator( # 실패 => 메세지 발생
         task_id='task_slp_90',
-        bash_command='sleep 90',
+        bash_command='sleep 90', 
     )
 
-    task_ext_1 = BashOperator(
+    task_ext_1 = BashOperator( # 실패=> 메세지 발생
         trigger_rule='all_done',
         task_id='task_ext_1',
         bash_command='exit 1'
