@@ -12,9 +12,9 @@ import zipfile
     req_dt : 요청일자 from (req_dt~ req_dt2 10일을 초과할 수 없음 ('err_code', 'E1004'))
     req_dt2 : 요청일자 to
 '''
-
+# U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005"
-url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005&req_dt=20240422"
+url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100005&req_dt=20240422"
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=200001&req_dt=20240418&req_dt2=20240419"
 u = urllib.request.urlopen(url)
 
@@ -52,25 +52,30 @@ while True:
     file_path = outpath + file_name
     print(file_path)
 
-    with zipfile.ZipFile('C:/address_api/240418/AlterD.JUSUZR.20240418.ZIP', 'r') as zip_ref:
-        file_content = zip_ref.read('AlterD.JUSUZR.20240418.TI_SPRD_RDNM.TXT')
-        file_content_decod = file_content.decode('euc-kr')
-        print(file_content_decod)
+    '''
+        파일명 
+        AlterD.JUSUZR.20240422.TI_SPRD_RDNM.TXT
+        AlterD : 공간 및 속성정보데이터 일/월변동분 
+        JUSUZR : 문서코드
+        20240422 : 데이터가 추출되어 전송되는 일자
+        TI_SPRD_RDNM : 데이터 추출의 기준이 되는 테이블명 
+        Deletion : 삭제건 데이터
+    '''
+    import pandas as pd
 
+    with zipfile.ZipFile(file_path, 'r') as zip_ref:
+         # List all the files and directories in the zip file
+        dfs = []
+        print("Contents of the zip file:")
+        for file_info in zip_ref.infolist():
+            print(file_info.filename)
+            dfs.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', header=None ))
 
-    # with zipfile.ZipFile(file_path, 'r') as zip_ref:
-    #      # List all the files and directories in the zip file
-    #     print("Contents of the zip file:")
-    #     for file_info in zip_ref.infolist():
-    #         print(file_info.filename)
-        
-    #     file_content = zip_ref.read('AlterD.JUSUZR.20240422.TI_SPRD_RDNM.TXT')
-    #     print(file_content)
-
-        # 변경된 내역이 없다면 No Data 
-
-
-        # Extract all files to a specified directory (optional)
-        #extraction_path = "extracted_files/"
-        #zip_ref.extractall(extraction_path)
-        #print("\nFiles extracted to:", extraction_path)
+        if not dfs:
+            print("No Data")
+        else: 
+            print("IS DATA")
+            all_df=pd.concat(dfs)
+            for index, row in all_df.iterrows():
+            # Access row elements using row[column_index]
+                print(row[index])

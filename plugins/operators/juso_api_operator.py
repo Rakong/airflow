@@ -67,6 +67,20 @@ class JusoApiOperator(BaseOperator):
             file_path = outpath + file_name
             print(file_path)
 
+            with zipfile.ZipFile(file_path, 'r') as zip_ref:
+                update_dp = []
+                delete_dp = []
+                for file_info in zip_ref.infolist():
+                    filenm = file_info.filename
+                    # 수정건
+                    update_dp.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', header=None ))
+                    
+                    # 삭제건 (파일명으로 분기처리해야함)
+            
+                
+
+
+
 
         
 
