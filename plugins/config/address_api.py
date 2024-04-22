@@ -12,9 +12,10 @@ import zipfile
     req_dt : 요청일자 from (req_dt~ req_dt2 10일을 초과할 수 없음 ('err_code', 'E1004'))
     req_dt2 : 요청일자 to
 '''
-#url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100005"
-url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100005&req_dt=20240422"
-#url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=200001&req_dt=20240418&req_dt2=20240419"
+
+#url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005"
+url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005&req_dt=20240422"
+#url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=200001&req_dt=20240418&req_dt2=20240419"
 u = urllib.request.urlopen(url)
 
 while True:
