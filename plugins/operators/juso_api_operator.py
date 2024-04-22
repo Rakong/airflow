@@ -31,7 +31,7 @@ class JusoApiOperator(BaseOperator):
         import urllib.request
 
         api_connection = BaseHook.get_connection(self.http_conn_id)
-        self.base_url = f'http://{api_connection.host}/{self.endpoint}/'
+        self.base_url = f'http://{api_connection.host}/{self.endpoint}'
         u = urllib.request.urlopen(self.base_url)
         while True:
             print(u.getheaders()) # header error code 있음
