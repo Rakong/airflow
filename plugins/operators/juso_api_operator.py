@@ -77,8 +77,7 @@ class JusoApiOperator(BaseOperator):
                     
                     # 삭제건 (파일명으로 분기처리해야함)
             
-
-            upt_data = update_pd.concat(update_pd)
+            upt_data = pd.concat(update_pd)
             
             if upt_data.loc[0,0] != 'No Data':
                 print('DB upsert')
