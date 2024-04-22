@@ -85,11 +85,11 @@ class JusoApiOperator(BaseOperator):
                 import psycopg2
                 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
-                postgres_hook = PostgresHook(self.db_conn_id)
-                with closing(postgres_hook.get_conn()) as conn:
-                    with closing(conn.cursor()) as cursor:
-                        conn.commit()
-                        
+                #     postgres_hook = PostgresHook(self.db_conn_id)
+                #     with closing(postgres_hook.get_conn()) as conn:
+                #         with closing(conn.cursor()) as cursor:
+                #             conn.commit()
+                            
 
 
 
@@ -101,10 +101,6 @@ class JusoApiOperator(BaseOperator):
                 # self.port = db_connection.port
 
                 # 
-
-
-
-
 
             else:
                 print("No Data")
