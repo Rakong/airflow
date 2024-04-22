@@ -1,5 +1,5 @@
 from airflow import DAG
-from operator.juso_api_operator import JusoApiOperator
+from operators.juso_api_operator import JusoApiOperator
 from airflow.models import Variable
 import pendulum
 
