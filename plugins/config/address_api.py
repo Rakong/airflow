@@ -76,6 +76,9 @@ while True:
         else: 
             print("IS DATA")
             all_df=pd.concat(dfs)
-            for index, row in all_df.iterrows():
-            # Access row elements using row[column_index]
-                print(row[index])
+
+            data_str = all_df.loc[0,0]
+            if data_str =='No Data': 
+                print("Daat 없어")
+            else: 
+               print("Daat 있어")

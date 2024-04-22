@@ -68,16 +68,27 @@ class JusoApiOperator(BaseOperator):
             print(file_path)
 
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
-                update_dp = []
-                delete_dp = []
+                update_pd = []
+                delete_pd = []
                 for file_info in zip_ref.infolist():
                     filenm = file_info.filename
                     # 수정건
-                    update_dp.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', header=None ))
+                    update_pd.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', header=None ))
                     
                     # 삭제건 (파일명으로 분기처리해야함)
             
-                
+
+            upt_data = update_pd.concat(update_pd)
+            
+            if upt_data.loc[0,0] != 'No Data':
+                print('DB upsert')
+            else:
+                print("No Data")
+
+
+
+
+
 
 
 
