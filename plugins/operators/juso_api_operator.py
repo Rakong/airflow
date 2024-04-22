@@ -78,9 +78,34 @@ class JusoApiOperator(BaseOperator):
                     # 삭제건 (파일명으로 분기처리해야함)
             
             upt_data = pd.concat(update_pd)
-            
+        
+            columnss_to_insert = ['area_cod', 'road_code', 'road_name', 'road_name_en', ]
+
             if upt_data.loc[0,0] != 'No Data':
-                print('DB upsert')
+                import psycopg2
+                from airflow.providers.postgres.hooks.postgres import PostgresHook
+
+                postgres_hook = PostgresHook(self.db_conn_id)
+                with closing(postgres_hook.get_conn()) as conn:
+                    with closing(conn.cursor()) as cursor:
+                        conn.commit()
+                        
+
+
+
+                # db_connection = BaseHook.get_connection(self.db_conn_id)
+                # self.host = db_connection.host
+                # self.user = db_connection.login
+                # self.passwork = db_connection.password
+                # self.dbname = db_connection.schema
+                # self.port = db_connection.port
+
+                # 
+
+
+
+
+
             else:
                 print("No Data")
 

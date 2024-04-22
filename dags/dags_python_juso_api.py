@@ -18,7 +18,7 @@ with DAG(
 ) as dag: 
     task_juso_api = JusoApiOperator(
         task_id='task_juso_api',
-        cntc_cd='100005',
+        cntc_cd='100001',
         path='/opt/airflow/files/jusoapi',
         base_dt='{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}'
     )

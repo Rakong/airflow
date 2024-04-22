@@ -14,7 +14,7 @@ import zipfile
 '''
 # U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005"
-url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100005&req_dt=20240422"
+url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100001&req_dt=20240422"
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=200001&req_dt=20240418&req_dt2=20240419"
 u = urllib.request.urlopen(url)
 
