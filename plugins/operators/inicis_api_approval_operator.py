@@ -35,6 +35,8 @@ class InicisApprovalOperator(BaseOperator):
             "etime" : "235959",                  # 종료시간 고정
         }
 
+        print("Request : ", request_data)
+
         response = requests.post(self.url, headers=headers, data=request_data)
 
         if response.status_code == 200:
