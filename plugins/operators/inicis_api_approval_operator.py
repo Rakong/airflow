@@ -1,7 +1,4 @@
-from typing import Any
 from airflow.models.baseoperator import BaseOperator
-from airflow.hooks.base import BaseHook
-from airflow.utils.context import Context
 
 '''
 승인대사 
@@ -9,7 +6,7 @@ from airflow.utils.context import Context
 
 class InicisApprovalOperator(BaseOperator):
     
-    template_fields = ()
+    template_fields = ('mid', 'passwd', 'base_dt')
 
     def __init__(self, url, postgres_conn_id, **kwargs):
         super().__init__(**kwargs)
