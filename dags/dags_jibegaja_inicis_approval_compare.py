@@ -14,5 +14,5 @@ with DAG(
     approval_task = InicisApprovalOperator(
         task_id='inicis_approval_task',
         url='https://iniweb.inicis.com/service/urlsvc/UrlSendAll.jsp',
-        postgres_conn_id='my_postgres_connection'
+        postgres_conn_id='conn-db-postgres-custom'
     )
