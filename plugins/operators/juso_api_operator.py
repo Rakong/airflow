@@ -67,6 +67,31 @@ class JusoApiOperator(BaseOperator):
             file_path = outpath + file_name
             print(file_path)
 
+            columnss_to_insert = [
+                'area_code',
+                'door_seq',
+                'law_code',
+                'large_name',
+                'middle_name',
+                'small_name',
+                'road_code',
+                'road_name',
+                'underground_yn',
+                'main_bld_no',
+                'sub_bld_no',
+                'bld_name',
+                'zip_code',
+                'bld_usage',
+                'bld_grp',
+                'admin_name',
+                'utmk_x',
+                'utmk_y',
+                'coord_x',
+                'coord_y',
+                'move_reason_code',
+                'bld_gr'
+            ]
+
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 update_pd = []
                 delete_pd = []
@@ -78,29 +103,18 @@ class JusoApiOperator(BaseOperator):
                     # 삭제건 (파일명으로 분기처리해야함)
             
             upt_data = pd.concat(update_pd)
-        
-            columnss_to_insert = ['area_cod', 'road_code', 'road_name', 'road_name_en', ]
 
             if upt_data.loc[0,0] != 'No Data':
                 import psycopg2
                 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
-                #     postgres_hook = PostgresHook(self.db_conn_id)
-                #     with closing(postgres_hook.get_conn()) as conn:
-                #         with closing(conn.cursor()) as cursor:
-                #             conn.commit()
-                            
-
-
-
-                # db_connection = BaseHook.get_connection(self.db_conn_id)
-                # self.host = db_connection.host
-                # self.user = db_connection.login
-                # self.passwork = db_connection.password
-                # self.dbname = db_connection.schema
-                # self.port = db_connection.port
-
-                # 
+                
+                postgres_hook = PostgresHook(self.db_conn_id)
+                with closing(postgres_hook.get_conn()) as conn:
+                    with closing(conn.cursor()) as cursor:
+                        for index, row in upt_data.iterrows():
+                            cursor.execute("INSERT INTO your_table (col1, col3, col5, ...) VALUES (%s, %s, %s, ...)", tuple(row))
+                        conn.commit()
 
             else:
                 print("No Data")

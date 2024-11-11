@@ -14,7 +14,7 @@ import zipfile
 '''
 # U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=100005"
-url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQxOTE3MzAxOTExNDcwNjU=&date_gb=D&retry_in=Y&cntc_cd=100001&req_dt=20240422"
+url ="http://update.juso.go.kr/updateInfo.do?app_key=U01TX0FVVEgyMDI0MDQyMjA5MjYxNjExNDcwODM=&date_gb=D&retry_in=Y&cntc_cd=100001&req_dt=20240513"
 #url ="http://update.juso.go.kr/updateInfo.do?app_key={}&date_gb=D&retry_in=Y&cntc_cd=200001&req_dt=20240418&req_dt2=20240419"
 u = urllib.request.urlopen(url)
 
@@ -67,17 +67,41 @@ while True:
          # List all the files and directories in the zip file
         dfs = []
         print("Contents of the zip file:")
+
+        columnss_to_insert = [
+            'area_code',
+            'door_seq',
+            'law_code',
+            'large_name',
+            'middle_name',
+            'small_name',
+            'road_code',
+            'road_name',
+            'underground_yn',
+            'main_bld_no',
+            'sub_bld_no',
+            'bld_name',
+            'zip_code',
+            'bld_usage',
+            'bld_grp',
+            'admin_name',
+            'utmk_x',
+            'utmk_y',
+            'coord_x',
+            'coord_y',
+        ]
+
         for file_info in zip_ref.infolist():
             print(file_info.filename)
-            dfs.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', header=None ))
+            dfs.append(pd.read_csv(zip_ref.open(file_info), encoding='cp949', sep='|', names=columnss_to_insert ))
 
         if not dfs:
             print("No Data")
         else: 
             print("IS DATA")
             all_df=pd.concat(dfs)
-
-            data_str = all_df.loc[0,0]
+            print(all_df.head())
+            data_str = all_df.loc[0,'area_code']
             if data_str =='No Data': 
                 print("Daat 없어")
             else: 
