@@ -41,7 +41,7 @@ class InicisApprovalOperator(BaseOperator):
             print("이니시스 승인대사 응답 성공")
             
             lines = response.text.split("<br>")
-            data =[lines.split("|") for line in lines if line.strip()]
+            data =[line.split("|") for line in lines if line.strip()]
             print("Response : ", data)
 
         else:
